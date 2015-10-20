@@ -9,69 +9,69 @@
   <script src="static/js/vue.js"></script>
   <script>
     $(function() {
-      var vm = new Vue({
-        el:'#vm',
-        data:{
-	  users:[],
-	  username:"",
-	  mobile:"",
-	  selCmmy:0,
-	  cmmys:[],
-	  checked:false
-	},
-        methods:{
-	  edit_user:function(user){
-	    console.log('edit user :' + user);
-	  },
-          delete_user:function(user){
-	    var url = '/user/del?id=' + user.id;
-	    console.log(url);
-          },
-          batchDel:function(){
-	    var ids = [];
-	    for (var i in this.users) {
-              if (this.users[i].checked) {
-                ids.push(this.users[i].id);
-	      }
-	    }
-	    var url = '/use/del?id[]=' + ids;
-	    console.log(url);
-	  },
-          search:function(){
-            var url = '/user/list?name=' + this.username + '&mobile=' + this.mobile + '&cmmyId=' + this.selCmmy;
-	    console.log(url);
-          },
-          allCheck:function(){
-            console.log(this.checked);
-            var isCheck = this.checked;
-	    this.users = this.users.map(function(user){
-	      user.checked = isCheck;
-	      return user;
-            });
-	  }
-	}	
-      });
-      loadUser();
-      loadCmmy();
-      function loadUser() {
-        var result = [];
-        for (var i=0; i<10; i++){
-          result.push({
-            id: i,
-            name:'luob',
-            mobile:'1835960258' + i,
-            cmmy:'云聚',
-	    checked:false
-          });  
+        var vm = new Vue({
+            el:'#vm',
+            data:{
+	        users:[],
+	        username:"",
+	        mobile:"",
+	        selCmmy:0,
+	        cmmys:[],
+	        checked:false
+	    },
+            methods:{
+	        edit_user:function(user){
+	            console.log('edit user :' + user);
+	        },
+                delete_user:function(user){
+	            var url = '/user/del?id=' + user.id;
+	            console.log(url);
+                },
+                batchDel:function(){
+	            var ids = [];
+	            for (var i in this.users) {
+                        if (this.users[i].checked) {
+                        ids.push(this.users[i].id);
+	                }
+	            }
+	            var url = '/use/del?id[]=' + ids;
+	            console.log(url);
+	        },
+                search:function(){
+                    var url = '/user/list?name=' + this.username + '&mobile=' + this.mobile + '&cmmyId=' + this.selCmmy;
+	            console.log(url);
+                },
+                allCheck:function(){
+                    console.log(this.checked);
+                    var isCheck = this.checked;
+	            this.users = this.users.map(function(user){
+	            user.checked = isCheck;
+	            return user;
+                    });
+	        }   
+	    }	
+        });
+        loadUser();
+        loadCmmy();
+        function loadUser() {
+            var result = [];
+            for (var i=0; i<10; i++){
+                result.push({
+                    id: i,
+                    name:'luob',
+                    mobile:'1835960258' + i,
+                    cmmy:'云聚',
+	            checked:false
+                });  
+            }
+            vm.users = result;
         }
-        vm.users = result;
-      }
-      function loadCmmy() {
-        var cmmys = [];
-	cmmys.push({text:"A", value:1});
-	cmmys.push({text:"B", value:2});
-	vm.cmmys = cmmys;
-      }
+        function loadCmmy() {
+            var cmmys = [];
+	    cmmys.push({text:"A", value:1});
+	    cmmys.push({text:"B", value:2});
+	    vm.cmmys = cmmys;
+        }
     });
   </script>
 </head>

@@ -9,32 +9,32 @@
   <script src="static/js/vue.js"></script>
   <script>
     $(function(){
-      var vm = new Vue({
-        el:"#vm",
-        data:{
-          name:"",
-	  email:"",
-	  password:"",
-	  password2:""
-        },
-        methods:{
-          submit:function() {
-	    if(confirm("确认要注册吗")) {
-	      register({
-	        name:this.name,
-		email:this.email,
-		password:this.password,
-		password2:this.password
-	      });
-	    }
-          }
-        }
-      });
+        var vm = new Vue({
+            el:"#vm",
+            data:{
+                name:"",
+	        email:"",
+	        password:"",
+	        password2:""
+            },
+            methods:{
+                submit:function() {
+	            if(confirm("确认要注册吗")) {
+	                register({
+	                    name:this.name,
+		            email:this.email,
+		            password:this.password,
+		            password2:this.password
+	                });
+	            }
+                }
+            }
+        });
     });
     function register(user) {
-      var url = "/user/reg?name=" + user.name + "&email=" + user.email + "&password=" + user.password + "&password2=" + user.password2;
-      console.log(url);
-      alert('注册成功');
+        var url = "/user/reg?name=" + user.name + "&email=" + user.email + "&password=" + user.password + "&password2=" + user.password2;
+        console.log(url);
+        alert('注册成功');
     }
   </script>
 </head>
