@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>vue.js demo</title>
+  <link rel="stylesheet" href="static/css/uikit.min.css">
+  <link rel="stylesheet" href="static/css/uikit.gradient.min.css">
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/vue.js"></script>
+  <script>
+    $(function(){
+	var vm = new Vue({
+	    el:'#vm',
+            data:{
+                 houses:[{
+		     estate:'',
+		     cmmy:'',
+		     build:'',
+		     room:''
+		 },{
+		     estate:'',
+		     cmmy:'',
+		     build:'',
+		     room:''
+		 }]
+	    },
+            methods:{
+	        add_house:function(){
+		    this.houses.push({
+		        estate:'',
+			cmmy:'',
+			build:'',
+			room:''
+		    });
+		},
+                submit:function(){
+		    var params = this.houses.reduce(function(item,item2){
+		        return {estate:item.estate + ',' + item2.estate, cmmy:item.cmmy + ',' + item2.cmmy, build:item.build + ',' + item2.build, room:item.room + ',' + item2.room};
+		    });
+		    var url = 'user/add_house?estate=' + params.estate + '&cmmy=' + params.cmmy + '&build=' + params.build + '&room=' + params.room;
+		    console.log(url);
+		}
+	    }
+	});
+    });
+  </script>
+</head>
+<body>
+  <div class="uk-container uk-container-center">
+    <div class="uk-grid">
+      <div class="uk-width-2-3">
+	<hr />
+	<h1>Welcome</h1>
+        <form id="vm" class="uk-form uk-form-stacked">
+	  <div v-repeat="house:houses">
+	  <hr />
+          <div class="uk-form-row">
+	    <label class="uk-form-label">物业:</label>
+	    <div class="uk-form-controls">
+	      <input v-model="house.estate" type="text" maxlength="50" placeholder="物业" class="uk-width-1-1" />
+	    </div>
+	  </div>
+	  <div class="uk-form-row">
+	    <label class="uk-form-label">小区:</label>
+	    <div class="uk-form-controls">
+	      <input v-model="house.cmmy" type="text" maxlength="50" placeholder="小区" class="uk-width-1-1" />
+	    </div>
+   	  </div>
+	  <div class="uk-form-row">
+	    <label class="uk-form-label">楼栋:</label>
+	    <div class="uk-form-controls">
+	      <input v-model="house.build" type="text" maxlength="50" placeholder="楼栋" class="uk-width-1-1" />
+	    </div>
+	  </div>
+	  <div class="uk-form-row">
+	    <label class="uk-form-label">房屋号:</label>
+	    <div class="uk-form-controls">
+	      <input v-model="house.room" type="text" maxlength="50" placeholder="房屋号" class="uk-width-1-1" />
+            </div>
+	  </div>
+	  </div>
+          <div class="uk-form-row">
+	    <div v-on="click:add_house()" class="uk-button uk-button-primary">增加一处房产</div>
+	    <div v-on="click:submit()" class="uk-button uk-button-primary">添加</div>
+	  </div>
+	</form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
